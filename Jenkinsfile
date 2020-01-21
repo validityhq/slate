@@ -22,7 +22,7 @@ rpPipeline() {
     }
 
     if (prNumber != null) {
-      pipelineOverrides['dns.dnsName'] = "${deployName}.bv-sandbox.validity.com"
+      pipelineOverrides.put('dns.dnsName', "${deployName}.bv-sandbox.validity.com")
     }
 
     overrides = pipelineOverrides
