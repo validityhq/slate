@@ -1,0 +1,28 @@
+{
+    "rules": [
+        {
+            "rulePriority": 1,
+            "description": "Expire all untagged images",
+            "selection": {
+                "tagStatus": "untagged",
+                "countType": "imageCountMoreThan",
+                "countNumber": 1
+            },
+            "action": {
+                "type": "expire"
+            }
+        },
+        {
+            "rulePriority": 2,
+            "description": "Expire the oldest image once we get 800 versions of that image",
+            "selection": {
+                "tagStatus": "any",
+                "countType": "imageCountMoreThan",
+                "countNumber": 800
+            },
+            "action": {
+                "type": "expire"
+            }
+        }
+    ]
+}
