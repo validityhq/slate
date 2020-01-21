@@ -2,7 +2,7 @@
 
 def prNumber = env.CHANGE_ID
 def branchName = BRANCH_NAME
-def pipelineOverrides = [ 'image.repository': "024716640333.dkr.ecr.us-east-1.amazonaws.com/bv-slate-docs" ]
+def pipelineOverrides = [ ]
 
 rpPipeline() {
     imageName = "bv-slate-docs"
