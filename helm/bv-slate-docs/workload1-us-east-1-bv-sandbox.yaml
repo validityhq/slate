@@ -1,5 +1,3 @@
-image:
-  repository: 024716640333.dkr.ecr.us-east-1.amazonaws.com/bv-slate-docs
 deployment:
   resources:
     requests:
