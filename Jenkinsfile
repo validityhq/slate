@@ -2,6 +2,7 @@
 
 def prNumber = env.CHANGE_ID
 def branchName = BRANCH_NAME
+def pipelineOverrides = []
 
 rpPipeline() {
     imageName = "bv-slate-docs"
@@ -19,5 +20,11 @@ rpPipeline() {
       default:
         deployName = "bv-slate-docs-${prNumber}"
     }
+
+    if (prNumber != null) {
+      pipelineOverrides['dns.dnsName'] = "${deployName}."bv-sandbox.validity.com""
+    }
+
+    overrides = pipelineOverrides
 }
 
