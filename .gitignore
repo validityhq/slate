@@ -22,3 +22,7 @@ build/
 _yardoc
 doc/
 .idea/
+
+.terraform
+*.tfstate
+*.tfstate.backup
