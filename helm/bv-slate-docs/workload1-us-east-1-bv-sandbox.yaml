@@ -1,4 +1,7 @@
 deployment:
+  ports:
+    - containerPort: 4567
+      protocol: TCP
   resources:
     requests:
       cpu: 1000m

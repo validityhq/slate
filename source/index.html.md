@@ -8,7 +8,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - javascript
 
 toc_footers:
-  - <a href='https://bvsandbox-pr-2559.herokuapp.com/users/sign_up' target="blank">Sign Up for a Developer Key</a>
+  - <a href='https://bfiles-2559.bv-sandbox.validity.com/users/sign_up' target="blank">Sign Up for a Developer Key</a>
   - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
 
 includes:
