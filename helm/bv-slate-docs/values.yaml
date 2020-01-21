@@ -10,5 +10,4 @@ image:
   tag: "Set at deploy time"
 namespace: briteverify
 service:
-  targetPort: 8000
-  nodePort: 30100
+  targetPort: 4567
