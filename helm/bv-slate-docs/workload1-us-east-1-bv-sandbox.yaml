@@ -19,7 +19,7 @@ deployment:
       path: /
       port: 4567
       scheme: HTTP
-  command: ["bundle", "exec", "middleman", "server"]
+  command: ["bundle", "exec", "middleman", "server", "--watcher-force-polling"]
 dns:
   dnsName: bv-slate-docs.bv-sandbox.validity.com
   target: stock-web-public-546137840.us-east-1.elb.amazonaws.com
