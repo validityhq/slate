@@ -18,5 +18,5 @@ variable "profile" {
 }
 
 variable "repo_name" {
-  default = "validityhq/dispatcher"
+  default = "validityhq/slate"
 }
