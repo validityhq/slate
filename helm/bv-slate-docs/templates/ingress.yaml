@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Chart.Name }}
+    name: {{ .Release.Name }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+  annotations:
+      alb.ingress.kubernetes.io/alb-name: {{ .Values.ingress.albName }}
+      alb.ingress.kubernetes.io/healthcheck-path: {{ .Values.ingress.healthCheckPath }}
+      kubernetes.io/ingress.class: {{ .Values.ingress.ingressClass }}
+spec:
+  rules:
+    - host: {{ .Values.dns.dnsName }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{ .Release.Name }}
+              servicePort: {{ .Values.ingress.servicePort }}
