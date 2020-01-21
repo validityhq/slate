@@ -2,7 +2,7 @@ deployment:
   annotations:
     "log.config.scalyr.com/attributes.parser": "bv-slate-docs"
   ports:
-    - containerPort: 8000
+    - containerPort: 4567
       protocol: TCP
 image:
   repository: 024716640333.dkr.ecr.us-east-1.amazonaws.com/bv-slate-docs
