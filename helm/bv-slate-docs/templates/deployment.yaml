@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    name: {{ .Release.Name }}
+    app: {{ .Chart.Name }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+spec:
+  strategy:
+{{ toYaml .Values.deployment.strategy | indent 4 }}
+  template:
+    metadata:
+{{- if .Values.deployment.annotations }}
+      annotations:
+{{ toYaml .Values.deployment.annotations | indent 8 }}
+{{- end }}
+      labels:
+        app: {{ .Release.Name }}
+        name: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Release.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+{{ toYaml .Values.deployment.command | indent 12 }}
+          args:
+{{ toYaml .Values.deployment.args | indent 12 }}
+          ports:
+{{ toYaml .Values.deployment.ports | indent 12 }}
+          resources:
+{{ toYaml .Values.deployment.resources | indent 12 }}
+          livenessProbe:
+{{ toYaml .Values.deployment.livenessProbe | indent 12 }}
+          readinessProbe:
+{{ toYaml .Values.deployment.readinessProbe | indent 12 }}
