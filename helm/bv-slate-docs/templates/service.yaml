@@ -14,7 +14,6 @@ spec:
     - name: http
       port: 80
       targetPort: {{ .Values.service.targetPort }}
-      nodePort: {{ .Values.service.nodePort }}
       protocol: TCP
   selector:
     app: {{ .Release.Name }}

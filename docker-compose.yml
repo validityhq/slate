@@ -1,6 +1,7 @@
-app:
-  build: .
-  ports:
-    - 4567:4567
-  volumes:
-    - ./source:/usr/src/app/source
+version: "3.7"
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - 80:80

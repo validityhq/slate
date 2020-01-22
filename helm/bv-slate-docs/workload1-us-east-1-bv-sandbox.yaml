@@ -1,7 +1,4 @@
 deployment:
-  ports:
-    - containerPort: 4567
-      protocol: TCP
   resources:
     requests:
       cpu: 1000m
@@ -12,14 +9,13 @@ deployment:
   livenessProbe:
     httpGet:
       path: /
-      port: 4567
+      port: 80
       scheme: HTTP
   readinessProbe:
     httpGet:
       path: /
-      port: 4567
+      port: 80
       scheme: HTTP
-  command: ["bundle", "exec", "middleman", "server"]
 dns:
   dnsName: bv-slate-docs.bv-sandbox.validity.com
   target: stock-web-public-546137840.us-east-1.elb.amazonaws.com
