@@ -25,8 +25,6 @@ spec:
         - name: {{ .Release.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command:
-{{ toYaml .Values.deployment.command | indent 12 }}
           args:
 {{ toYaml .Values.deployment.args | indent 12 }}
           ports:
