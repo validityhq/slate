@@ -9,12 +9,12 @@ deployment:
   livenessProbe:
     httpGet:
       path: /
-      port: 4567
+      port: 80
       scheme: HTTP
   readinessProbe:
     httpGet:
       path: /
-      port: 4567
+      port: 80
       scheme: HTTP
   command: ["bundle", "exec", "middleman", "server", "--watcher-force-polling"]
 dns:
