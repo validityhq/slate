@@ -202,14 +202,13 @@ This endpoint creates a List Job for a list of contacts.  If a remote_url is not
 
 ### HTTP Request
 
-`POST https://bfiles-2560.bv-sandbox.validity.com/api/v2/fullverify/list_jobs/contacts'
-
+`POST https://bfiles-2560.bv-sandbox.validity.com/api/v2/fullverify/list_jobs/contacts`
 
 ### POST Body Parameters
 
 Parameter | Description
 --------- | -----------
-name | Decriptive name for the job
+name | Descriptive name for the job
 remote_url | Location of the contacts csv
 
 ### HEADERS
