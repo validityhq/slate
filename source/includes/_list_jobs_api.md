@@ -102,11 +102,10 @@ errors | If present, an array object that lists the error codes and messages.
 This endpoint retrieves all List Jobs. Additionally a filter can be supplied to return only List Jobs of a particular status by appending a query param of status. Please see <a href="#common-result-attributes">Result Attributes</a> for a description of what each value represents.
 
 
-### HTTP Request
+### HTTP Requests
 
 `GET https://bfiles-2560.bv-sandbox.validity.com/api/v2/fullverify/list_jobs`
 
-### HTTP Request
 
 `GET https://bfiles-2560.bv-sandbox.validity.com/api/v2/fullverify/list_jobs?status=pending`
 
@@ -156,7 +155,7 @@ Example Usage:
 This endpoint retrieves a specific List Job. If the list job id supplied is not valid, a *not_found* error message will be returned instead. Please see <a href="#common-result-attributes">Result Attributes</a> for a description of what each value represents.
 
 
-### HTTP Request
+### HTTP Requests
 
 `GET https://bfiles-2560.bv-sandbox.validity.com/api/v2/fullverify/list_jobs/:list_job_id`
 
