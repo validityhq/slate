@@ -204,16 +204,57 @@ This endpoint creates a List Job for a list of contacts.  If a remote_url is not
 
 `POST https://bfiles-2560.bv-sandbox.validity.com/api/v2/fullverify/list_jobs/contacts`
 
-### POST Body Parameters
+### Post Body Parameters
 
 Parameter | Description
 --------- | -----------
 name | Descriptive name for the job
 remote_url | Location of the contacts csv
 
-### HEADERS
+### Headers
 
 Header | Value
 --------- | -----------
 Content-Type | application/json
+Authorization | ApiKey: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx
+
+## Export a List Job CSV
+
+> Successful Response (Contacts)
+
+```csv
+email,phone,address1,address2,city,state,zip,email_status,secondary_status,email_account,email_domain,phone_status,phone_errors,phone_service_type,phone_location,address_status,address_errors,address_corrected
+test_email@validity.com,5555555555,1030 West Addison Street,,Chicago,Illinois,60613,valid,disposable,test_email,validity.com,valid,,land,residential,valid,,false
+test_email2@validity.com,5555555555,4 Jersey St,,Boston,Ma,02215,valid,disposable,test_email2,validity.com,valid,,land,residential,valid,,false
+```
+
+> Unsuccessful Response
+
+```json
+{
+    "errors": {
+        "code": "not_found",
+        "message": "Completed List Job not found with supplied id."
+    }
+}
+```
+
+This endpoint returns verification results as csv.  If the job is not found, then a 422 indicating the job was not found.
+
+
+### HTTP Request
+
+`GET https://bfiles-2560.bv-sandbox.validity.com/api/v2/fullverify/list_jobs/:list_job_id/export`
+
+### Query Parameters
+
+Parameter | Description
+--------- | -----------
+list_job_id | Desired job for export
+
+### Headers
+
+Header | Value
+--------- | -----------
+Content-Type | application/csv
 Authorization | ApiKey: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx
