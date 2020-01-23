@@ -2,13 +2,10 @@
 title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - ruby
-  - python
-  - javascript
+  - json
 
 toc_footers:
-  - <a href='https://bfiles-2559.bv-sandbox.validity.com/users/sign_up' target="blank">Sign Up for a Developer Key</a>
+  - <a href='https://bfiles-2560.bv-sandbox.validity.com/users/sign_up' target="blank">Sign Up for a Developer Key</a>
   - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
 
 includes:
@@ -19,145 +16,175 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
-
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
+Welcome to the BriteVerify (BV) API Documenation. You can use this documentation to learn more about our List Job API.
 
 # Authentication
 
-> To authorize, use this code:
 
-```ruby
-require 'kittn'
+> To incude the apikey in the body params:
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
+```json
+{
+  "apikey": "123456-123456-123456"
+}
 ```
 
-```python
-import kittn
+> To incude the apikey in the headers:
 
-api = kittn.authorize('meowmeowmeow')
+```
+Authorization: ApiKey: 123456-123456-123456
 ```
 
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+> Authorization Error
+
+```json
+{
+    "errors": {
+        "code": "access_denied",
+        "message": "Unauthorized. Apikey invalid or missing."
+    }
+}
 ```
 
-```javascript
-const kittn = require('kittn');
+The BV APIs expects the apikey to be included in all API requests to the server. You can register for a new apikey [by creating an account](https://bfiles-2560.bv-sandbox.validity.com/users/sign_up). The apikey can either be in the request Header or the params body.
 
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>123456-123456-123456</code> with your personal API key.
 </aside>
 
-# Kittens
+# List Jobs
 
-## Get All Kittens
+## Get All List Jobs
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
+> Successful Response
 
 ```json
 [
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
+    {
+        "file_job_id": "12345-12345-11111",
+        "name": "test_1.csv",
+        "status": "import_error",
+        "progess": "0%",
+        "records_verified": 0,
+        "expires_at": null,
+        "uploaded_at": "01/22/2020",
+        "export_links": {},
+        "errors": [
+            {
+                "code": "import_error",
+                "message": "Unclosed quoted field on line 2."
+            }
+        ]
+    },
+    {
+        "file_job_id": "143445-17885-12241",
+        "name": "test_2.csv",
+        "status": "complete",
+        "progess": "100%",
+        "records_verified": 5,
+        "expires_at": "01/29/2020 - 03:32PM",
+        "uploaded_at": "01/22/2020",
+        "export_links": {
+            "csv": "https://bfiles-2560.bv-sandbox.validity.com/api/v2/fullverify/list_jobs/143445-17885-12241/export",
+            "json": "https://bfiles-2560.bv-sandbox.validity.com/api/v2/fullverify/list_jobs/143445-17885-12241/results"
+        }
+    },
+    {
+        "file_job_id": "72663-98532-18761",
+        "name": "test_3.csv",
+        "status": "complete",
+        "progess": "100%",
+        "records_verified": 35,
+        "expires_at": "12/19/2019 - 02:46PM",
+        "uploaded_at": "12/12/2019",
+        "export_links": {},
+        "errors": [
+            {
+                "code": "expired",
+                "message": "Expired. Download Unavailable."
+            }
+        ]
+    }
+  ]
+```
+
+> Unsuccessful Response
+```json
+[]
+```
+
+> Successful Filtered Response
+
+```json
+[
+    {
+        "file_job_id": "83927-83634-11726",
+        "name": "test_4.csv",
+        "status": "pending",
+        "progess": "0%",
+        "records_verified": 0,
+        "expires_at": null,
+        "uploaded_at": "01/23/2020",
+        "export_links": {}
+    }
 ]
 ```
 
-This endpoint retrieves all kittens.
+> Unsuccessful Filtered Response
+
+```json
+[]
+```
+
+This endpoint retrieves all List Jobs. Additionally a filter can be supplied to return only List Jobs of a particular status by appending a query param of status.
+
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`GET https://bfiles-2560.bv-sandbox.validity.com/api/v2/fullverify/list_jobs`
+
+### HTTP Request
+
+`GET https://bfiles-2560.bv-sandbox.validity.com/api/v2/fullverify/list_jobs?status=pending`
 
 ### Query Parameters
 
-Parameter | Default | Description
+Parameter | Options | Description
 --------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+status    | prepped, pending, verifying, import_error, complete, deleted | If present, the result will be filtered to only the List Jobs with the matching status. To query multiple statuses, string them together with commas.
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
+Example Usage:
+
+`status=verifying`
+`status=pending,verifying`
+
 
 ## Get a Specific Kitten
 
 ```ruby
 require 'kittn'
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
+api = Kittn::APIClient.authorize!('123456-123456-123456')
 api.kittens.get(2)
 ```
 
 ```python
 import kittn
 
-api = kittn.authorize('meowmeowmeow')
+api = kittn.authorize('123456-123456-123456')
 api.kittens.get(2)
 ```
 
 ```shell
 curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
+  -H "Authorization: 123456-123456-123456"
 ```
 
 ```javascript
 const kittn = require('kittn');
 
-let api = kittn.authorize('meowmeowmeow');
+let api = kittn.authorize('123456-123456-123456');
 let max = api.kittens.get(2);
 ```
 
@@ -192,27 +219,27 @@ ID | The ID of the kitten to retrieve
 ```ruby
 require 'kittn'
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
+api = Kittn::APIClient.authorize!('123456-123456-123456')
 api.kittens.delete(2)
 ```
 
 ```python
 import kittn
 
-api = kittn.authorize('meowmeowmeow')
+api = kittn.authorize('123456-123456-123456')
 api.kittens.delete(2)
 ```
 
 ```shell
 curl "http://example.com/api/kittens/2"
   -X DELETE
-  -H "Authorization: meowmeowmeow"
+  -H "Authorization: 123456-123456-123456"
 ```
 
 ```javascript
 const kittn = require('kittn');
 
-let api = kittn.authorize('meowmeowmeow');
+let api = kittn.authorize('123456-123456-123456');
 let max = api.kittens.delete(2);
 ```
 
