@@ -168,3 +168,54 @@ This endpoint retrieves a specific List Job. If the list job id supplied is not 
 Parameter | Description
 --------- | -----------
 list_job_id | The id of the list job you wish to learn more about
+
+
+## Create a Contacts List Job
+
+> Successful Response
+
+```json
+{
+    "list_job_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx",
+    "name": "customers.csv",
+    "status": "pending",
+    "progess": "0%",
+    "records_verified": 0,
+    "expires_at": null,
+    "uploaded_at": "01/23/2020",
+    "export_links": {}
+}
+```
+
+> Unsuccessful Response
+
+```json
+{
+    "errors": {
+        "code": "422",
+        "message": "Missing data to verify."
+    }
+}
+```
+
+This endpoint creates a List Job for a list of contacts.  If a remote_url is not supplied, then a 422 indicating missing data is returned. Please see <a href="#common-result-attributes">Result Attributes</a> for a description of what each value represents.
+
+
+### HTTP Request
+
+`POST https://bfiles-2560.bv-sandbox.validity.com/api/v2/fullverify/list_jobs/contacts'
+
+
+### POST Body Parameters
+
+Parameter | Description
+--------- | -----------
+name | Decriptive name for the job
+remote_url | Location of the contacts csv
+
+### HEADERS
+
+Header | Value
+--------- | -----------
+Content-Type | application/json
+Authorization | ApiKey: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx
