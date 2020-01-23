@@ -62,7 +62,7 @@ You must replace <code>123456-123456-123456</code> with your personal API key.
 ```json
 [
     {
-        "file_job_id": "12345-12345-11111",
+        "list_job_id": "12345-12345-11111",
         "name": "test_1.csv",
         "status": "import_error",
         "progess": "0%",
@@ -78,7 +78,7 @@ You must replace <code>123456-123456-123456</code> with your personal API key.
         ]
     },
     {
-        "file_job_id": "143445-17885-12241",
+        "list_job_id": "143445-17885-12241",
         "name": "test_2.csv",
         "status": "complete",
         "progess": "100%",
@@ -91,7 +91,7 @@ You must replace <code>123456-123456-123456</code> with your personal API key.
         }
     },
     {
-        "file_job_id": "72663-98532-18761",
+        "list_job_id": "72663-98532-18761",
         "name": "test_3.csv",
         "status": "complete",
         "progess": "100%",
@@ -119,7 +119,7 @@ You must replace <code>123456-123456-123456</code> with your personal API key.
 ```json
 [
     {
-        "file_job_id": "83927-83634-11726",
+        "list_job_id": "83927-83634-11726",
         "name": "test_4.csv",
         "status": "pending",
         "progess": "0%",
@@ -159,8 +159,22 @@ Example Usage:
 `status=verifying`
 `status=pending,verifying`
 
+### Result Attributes
 
-## Get a Specific Kitten
+Parameter | Description
+--------- | -----------
+list_job_id | The id of the list job
+name | The name of the uploaded csv for verification
+status | The current stage of the list job, commonly will be one of *prepped, pending, verifying, import_error, complete, deleted*
+progess | How far along in processing the list job is, in percentage
+records_verified | The total number of verified records for the list job
+expires_at | The expiration date of the results. After this date has passed, the results are purged and no longer accessible. BriteVerify only keeps the verified results for 7 days. Format of *MM/DD/YYYY - HH:SS AM/PM*
+uploaded_at | The date on which the list job was created, in the format of *MM/DD/YYYY*
+export_links | If available, a hash object including the API call to fetch the JSON result or CSV download for the list job
+errors | If present, an array object that lists the error codes and messages.
+
+
+## Get a Specific List Job
 
 ```ruby
 require 'kittn'
