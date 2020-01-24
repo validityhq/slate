@@ -9,7 +9,7 @@ Parameter | Description
 list_job_id | The id of the list job
 name | The name of the uploaded csv for verification
 status | The current stage of the list job, commonly will be one of *prepped, pending, verifying, import_error, complete, deleted*
-progess | How far along in processing the list job is, in percentage
+progress | How far along in processing the list job is, in percentage
 records_verified | The total number of verified records for the list job
 expires_at | The expiration date of the results. After this date has passed, the results are purged and no longer accessible. BriteVerify only keeps the verified results for 7 days. Format of *MM/DD/YYYY - HH:SS AM/PM*
 uploaded_at | The date on which the list job was created, in the format of *MM/DD/YYYY*
@@ -30,7 +30,7 @@ errors | If present, an array object that lists the error codes and messages.
         "list_job_id": "12345-12345-11111",
         "name": "test_1.csv",
         "status": "import_error",
-        "progess": "0%",
+        "progress": "0%",
         "records_verified": 0,
         "expires_at": null,
         "uploaded_at": "01/22/2020",
@@ -46,7 +46,7 @@ errors | If present, an array object that lists the error codes and messages.
         "list_job_id": "143445-17885-12241",
         "name": "test_2.csv",
         "status": "complete",
-        "progess": "100%",
+        "progress": "100%",
         "records_verified": 5,
         "expires_at": "01/29/2020 - 03:32PM",
         "uploaded_at": "01/22/2020",
@@ -59,7 +59,7 @@ errors | If present, an array object that lists the error codes and messages.
         "list_job_id": "72663-98532-18761",
         "name": "test_3.csv",
         "status": "complete",
-        "progess": "100%",
+        "progress": "100%",
         "records_verified": 35,
         "expires_at": "12/19/2019 - 02:46PM",
         "uploaded_at": "12/12/2019",
@@ -96,7 +96,7 @@ errors | If present, an array object that lists the error codes and messages.
         "list_job_id": "83927-83634-11726",
         "name": "test_4.csv",
         "status": "pending",
-        "progess": "0%",
+        "progress": "0%",
         "records_verified": 0,
         "expires_at": null,
         "uploaded_at": "01/23/2020",
@@ -156,7 +156,7 @@ Example Usage:
     "list_job_id": "143445-17885-12241",
     "name": "test_2.csv",
     "status": "complete",
-    "progess": "100%",
+    "progress": "100%",
     "records_verified": 5,
     "expires_at": "01/29/2020 - 03:32PM",
     "uploaded_at": "01/22/2020",
@@ -201,7 +201,7 @@ list_job_id | The id of the list job you wish to learn more about
     "list_job_id": "19865-12235-12251",
     "name": "customers.csv",
     "status": "pending",
-    "progess": "0%",
+    "progress": "0%",
     "records_verified": 0,
     "expires_at": null,
     "uploaded_at": "01/23/2020",
