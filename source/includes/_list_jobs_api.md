@@ -1,6 +1,6 @@
 # List Jobs
 
-## Common Result Attributes
+## List Job Result Attributes
 
 Each List Job endpoint shares the same result attributes, below find a helpful description of what each means. Still have questions? Reach out to a <a href="mailto:red-team@validity.com?Subject=List%20Job%20API%20Help" target="_top">support representative</a>!
 
@@ -22,7 +22,10 @@ errors | If present, an array object that lists the error codes and messages.
 > Successful Response
 
 ```json
-[
+{
+  "current_page": 1,
+  "total_pages": 5,
+  "list_jobs": [
     {
         "list_job_id": "12345-12345-11111",
         "name": "test_1.csv",
@@ -69,17 +72,26 @@ errors | If present, an array object that lists the error codes and messages.
         ]
     }
   ]
+}
 ```
 
 > Unsuccessful Response
+
 ```json
-[]
+{
+    "current_page": 1,
+    "total_pages": 1,
+    "list_jobs": []
+}
 ```
 
 > Successful Filtered Response
 
 ```json
-[
+{
+  "current_page": 1,
+  "total_pages": 1,
+  "list_jobs": [
     {
         "list_job_id": "83927-83634-11726",
         "name": "test_4.csv",
@@ -90,16 +102,23 @@ errors | If present, an array object that lists the error codes and messages.
         "uploaded_at": "01/23/2020",
         "export_links": {}
     }
-]
+  ]
+}
 ```
 
 > Unsuccessful Filtered Response
 
 ```json
-[]
+{
+    "current_page": 1,
+    "total_pages": 1,
+    "list_jobs": []
+}
 ```
 
-This endpoint retrieves all List Jobs. Additionally a filter can be supplied to return only List Jobs of a particular status by appending a query param of status. Please see <a href="#common-result-attributes">Result Attributes</a> for a description of what each value represents.
+This endpoint retrieves all List Jobs. By default, only 10 list jobs are returned at a single time. To return a different page, supply a `page` query param to the request. A filter can be supplied to return only List Jobs of a particular status by appending a query param of `status`.
+
+Please see <a href="#list-job-result-attributes">Result Attributes</a> for a description of what each value represents.
 
 
 ### HTTP Requests
@@ -109,10 +128,17 @@ This endpoint retrieves all List Jobs. Additionally a filter can be supplied to 
 
 `GET https://bfiles-2560.bv-sandbox.validity.com/api/v2/fullverify/list_jobs?status=pending`
 
+
+`GET https://bfiles-2560.bv-sandbox.validity.com/api/v2/fullverify/list_jobs?page=2`
+
+
+`GET https://bfiles-2560.bv-sandbox.validity.com/api/v2/fullverify/list_jobs?page=2&status=pending`
+
 ### Query Parameters
 
 Parameter | Options | Description
 --------- | ------- | -----------
+page      | Any number | The number of the page to return, if set to less than 1, the first page is returned. If set to greater than the number of pages, the last page is returned.
 status    | prepped, pending, verifying, import_error, complete, deleted | If present, the result will be filtered to only the List Jobs with the matching status. To query multiple statuses, string them together with commas.
 
 Example Usage:
@@ -152,13 +178,10 @@ Example Usage:
 }
 ```
 
-This endpoint retrieves a specific List Job. If the list job id supplied is not valid, a *not_found* error message will be returned instead. Please see <a href="#common-result-attributes">Result Attributes</a> for a description of what each value represents.
+This endpoint retrieves a specific List Job. If the list job id supplied is not valid, a *not_found* error message will be returned instead. Please see <a href="#list-job-result-attributes">Result Attributes</a> for a description of what each value represents.
 
 
 ### HTTP Requests
-
-`GET https://bfiles-2560.bv-sandbox.validity.com/api/v2/fullverify/list_jobs/:list_job_id`
-
 
 `GET https://bfiles-2560.bv-sandbox.validity.com/api/v2/fullverify/list_jobs/143445-17885-12241`
 
@@ -175,7 +198,7 @@ list_job_id | The id of the list job you wish to learn more about
 
 ```json
 {
-    "list_job_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx",
+    "list_job_id": "19865-12235-12251",
     "name": "customers.csv",
     "status": "pending",
     "progess": "0%",
@@ -191,13 +214,13 @@ list_job_id | The id of the list job you wish to learn more about
 ```json
 {
     "errors": {
-        "code": "422",
+        "code": "import_error",
         "message": "Missing data to verify."
     }
 }
 ```
 
-This endpoint creates a List Job for a list of contacts.  If a remote_url is not supplied, then a 422 indicating missing data is returned. Please see <a href="#common-result-attributes">Result Attributes</a> for a description of what each value represents.
+This endpoint creates a List Job for a list of contacts.  If a remote_url is not supplied, then a 422 indicating missing data is returned. Please see <a href="#list-job-result-attributes">Result Attributes</a> for a description of what each value represents.
 
 
 ### HTTP Request
@@ -257,4 +280,4 @@ list_job_id | Desired job for export
 Header | Value
 --------- | -----------
 Content-Type | application/csv
-Authorization | ApiKey: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx
+Authorization | ApiKey: 123456-123456-123456
